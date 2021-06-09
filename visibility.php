@@ -15,14 +15,19 @@
 
 
 
-<?php  
+
 
 
 class Produk{
 	public $judul, 
 			$penulis,
-			$penerbit,
-			$harga;
+			$penerbit;
+	protected $diskon = 0;
+
+	private $harga;		//hanya dapat di akses di kelas tententu saja, tidak semua class bisa memanggil begitu saja
+
+
+	// protected $harga; //hanya bisa di akses oleh class Produk dan turunannya seperti child clas
 
 
 	public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = "harga"){ 
@@ -32,6 +37,15 @@ class Produk{
 		$this->harga = $harga;
 		
 	}
+
+	
+
+
+
+
+	public function getHarga(){ //kelas ini hanya akan berlaku pada kelas Produk saja, karena sudah di ganti menjadi private
+			return $this->harga - ( $this->harga * $this->diskon / 100);
+		}
 
 
 	public function getLabel(){ 
@@ -55,6 +69,13 @@ class Produk{
 			parent::__construct($judul, $penulis, $penerbit , $harga  );
 			$this->jlhHalaman = $jlhHalaman;
 		}
+
+
+
+		
+
+
+
 		public function getInfoProduk(){
 			$str = "Komik :". parent::getInfoProduk() . " - {$this->jlhHalaman}. Halaman"; 
 			return $str;
@@ -71,6 +92,15 @@ class Produk{
 			$this->waktuMain = $waktuMain; 
 
 		}
+
+		// public function getHarga(){ //ini akan berlaku jika kyeword nya adalah protected karena hanya berlaku untuk class dan turunannya
+		// 	return $this->harga;
+		// }
+
+
+		public function setDiskon( $diskon ){
+		$this->diskon = $diskon ;
+	}
 		
 
 		public function getInfoProduk(){
@@ -103,3 +133,7 @@ $produk2 = new Game("uncharted", "neil", "sony", 250000, 50);
 echo $produk1->getInfoProduk();
 echo "<hr>";
 echo $produk2->getInfoProduk();
+echo "<hr>";
+
+$produk2->setDiskon(50);
+echo $produk2->getHarga(); //pemanggilan ini hanya bisa di lakukan ketika kelas any adlah protected
