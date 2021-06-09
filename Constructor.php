@@ -4,10 +4,18 @@
 
 
 class Produk{
-	public $judul = "judul", 
-			$penulis = "penulis",
-			$penerbit = "penerbit",
-			$harga = 0;	
+	public $judul, 
+			$penulis,
+			$penerbit,
+			$harga;	
+
+
+	public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = "harga"){ //nilai default nya disisi pada parameter, ketika hanya sebagian yg memiliki nilai, yg ksoong akan di isi nilai default
+		$this->judul = $judul; //variabel pada parameter akan mengambil nilai dari variabel public Produk
+		$this->penulis = $penulis;
+		$this->penerbit = $penerbit;
+		$this->harga = $harga;
+	}
 
 
 	public function getLabel(){
@@ -17,22 +25,17 @@ class Produk{
 }
 
 
-$produk3 = new Produk();
-$produk3->judul = "naruto";
-$produk3->penulis = "masashi khisimo";
-$produk3->peneerbit = "shonen jump";
-$produk3->harga = 30000;
+$produk1 = new Produk("naruto", "masasi","shonen", 30000); //setiap produk di buat objecnta,nilai nya diterima oleh constructor dan di pakai mengganti propertinya
+
 
 
 
 echo "<hr>";
 
-$produk4 = new Produk();
-$produk4->judul = "uncharted";
-$produk4->penulis = "neil druckmann";
-$produk4->penerbit = "sony computer";
-$produk4->harga = 250000;
-
-echo "Komik : ".$produk3->getLabel();
+$produk2 = new Produk("uncharted", "neil", "sony", 250000);
+$produk3 = new Produk("smacke down");
+echo "Komik :". $produk1->getLabel();
 echo "<br>";
-echo "Game :". $produk4->getLabel();
+echo "Game :". $produk2->getLabel();
+echo "<br>";
+var_dump($produk3); //yg terisi hanya nama game pada var_dump
