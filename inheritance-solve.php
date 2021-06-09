@@ -10,8 +10,7 @@
 //object type - menggunakan objek sebagai tipe data
 
 
-//masalah disini adalah ketika menambahkan jumlah halaman, waktu main dan tipe nya apa, kasus disini ada komik dan game, dimana komik memiliki halamana, sementara game memiliki waktu bukan halaman.
-// salah satu caranya adalah dengan menambah variable baru, di inisialkan di construct, membuat method baru getInfoLengkap jika komik menampilkan halaman, jika game menampilkan waktu main. kemudian pada pemanggilan pada produk komik di beri inisal halaman dan tipe nya komik, kemudian pada game di buat waktu dengan tipe nya adalah game
+//penyelesian nya adalah dengan membuat parrent class dan child class, mengapus inialisasi waktu dan halaman dengan mengisi di bagian child clas nya. child class bisa mengambil method di parret, sederhananya program akan mengecek code di child clas, jika tidak ada ,dia akan mengambil dari parrent nya
 
 
 class Produk{
@@ -20,18 +19,17 @@ class Produk{
 			$penerbit,
 			$harga,
 			$jlhHalaman,
-			$waktuMain,
-			$tipe;
+			$waktuMain;
 
 
-	public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = "harga", $jlhHalaman = 0, $waktuMain = 0, $tipe){ 
+	public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = "harga", $jlhHalaman = 0, $waktuMain = 0){ 
 		$this->judul = $judul; 
 		$this->penulis = $penulis;
 		$this->penerbit = $penerbit;
 		$this->harga = $harga;
 		$this->jlhHalaman = $jlhHalaman;
 		$this->waktuMain = $waktuMain;
-		$this->tipe = $tipe;
+		
 	}
 
 
@@ -41,7 +39,7 @@ class Produk{
 
 
 	public function getInfoProduk(){
-		$str = "{$this->tipe} : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}";
+		$str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga}";
 		return $str;
 	}
 
@@ -49,7 +47,7 @@ class Produk{
 
 }
 
-	class Komik extends Produk {
+	class Komik extends Produk { //extends dari parrent yaitu Produk
 		public function getInfoProduk(){
 			$str = "Komik : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jlhHalaman}. Halaman";
 			return $str;
@@ -60,7 +58,7 @@ class Produk{
 
 	class Game extends Produk {
 		public function getInfoProduk(){
-			$str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->waktuMain}. Jam";
+			$str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) ~ {$this->waktuMain}. Jam";
 			return $str;
 		}
 
@@ -81,9 +79,9 @@ class CetakInfoProduk{
 
 
 
-$produk1 = new Komik("naruto", "masasi","shonen", 30000, 100, 0, "Komik"); //100 = halaman
+$produk1 = new Komik("naruto", "masasi","shonen", 30000, 100, 0); //100 = halaman
 echo "<hr>";
-$produk2 = new Produk("uncharted", "neil", "sony", 250000, 0, 50, "Game"); //50 = waktu main
+$produk2 = new Produk("uncharted", "neil", "sony", 250000, 0, 50);
 
 
 echo $produk1->getInfoProduk();
