@@ -1,33 +1,14 @@
 <?php  
 
-//visibility acces modifier
-
-// konsep yang digunakan untk mengatur akses dari property dan method pda sebuah object
-//terdapat 3 keyword dapa visibility
-//*public dapat digunakan dimana saja, bahkan di luar kelas
-// *protected hanya dapat di gunakan di dalam sebuah method kelas beserta turunanya
-// *privat hanya dapat diguakan di dalam sebuah kelas tertentu saja
-
-//knp harus menggunakan visibility
-// hanya memperlihatkan aspek dari kela yg di butuhkan saja
-// menetukan kebutuhan yang jelas untuk object
-// untuk menghindari kendala pada kode untuk menghindari bug
-
-
-
-
-
+//setter getter(accesor method) menghindari ketika membuat properti visibility public, agas tidak bisa di akses sembarangan/secara langsung
 
 class Produk{
-	public $judul, 
+	private $judul, 
 			$penulis,
 			$penerbit;
-	protected	$diskon = 0;
+	protected $diskon = 0;
 
-	private $harga;		//hanya dapat di akses di kelas tententu saja, tidak semua class bisa memanggil begitu saja
-
-
-	// protected $harga; //hanya bisa di akses oleh class Produk dan turunannya seperti child clas
+	private $harga;		
 
 
 	public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = "harga"){ 
@@ -38,12 +19,54 @@ class Produk{
 		
 	}
 
+
+	public function setJudul($judul){ //untuk langsung merubah judul tidak akan bisa, karena propertinya privat, jika ingin merubah judul nya harus buat method baru, dengan nama lain membuat celahnya
+		// if ( !is_string($judul)) {
+		// 	throw new Exception("Judul Harus String");
+			
+		// } peringatah kerika mangubah judul bukan string
+		$this->judul = $judul;
+	}
+
+
+
+	public function setPenulis($penulis){ 
+		 $this->penulis = $penulis;
+	}
+
+
+	public function getPenulis(){
+		return $this->penulis;
+	}
+
+
+
+	public function setPenerbit($penerbit){ 
+		 $this->penerbit = $penerbit;
+	}
+
+
+	public function getPenerbit(){
+		return $this->penulis;
+	}
+
+
+
+
+
+	public function getJudul(){ //karena Produk adalah private, untuk mengakses nilai yang ada di dalam nya, maka harus di buat method yang bisa mengaksesnya di dalam class Produk itu sendiri atau bisa di sebut harus di buat celah nya
+
+		return $this->judul;
+	}
+
 	
 
+	public function setHarga($harga){ 
+		 $this->$penulis = $harga;
+	}
 
 
-
-	public function getHarga(){ //kelas ini hanya akan berlaku pada kelas Produk saja, karena sudah di ganti menjadi private
+	public function getHarga(){ 
 			return $this->harga - ( $this->harga * $this->diskon / 100);
 		}
 
@@ -93,9 +116,7 @@ class Produk{
 
 		}
 
-		// public function getHarga(){ //ini akan berlaku jika kyeword nya adalah protected karena hanya berlaku untuk class dan turunannya
-		// 	return $this->harga;
-		// }
+		
 
 
 		public function setDiskon( $diskon ){
@@ -136,4 +157,9 @@ echo $produk2->getInfoProduk();
 echo "<hr>";
 
 $produk2->setDiskon(50);
-echo $produk2->getHarga(); //pemanggilan ini hanya bisa di lakukan ketika kelas any adlah protected
+echo $produk2->getHarga(); 
+echo "<hr>";
+
+
+$produk1->setJudul("JudulBaru");
+echo $produk1->getJudul();
