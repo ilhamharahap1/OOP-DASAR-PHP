@@ -13,8 +13,8 @@ class Produk{
 			$harga = 0;	
 
 
-	public function sayHello(){
-		return "Hello World";
+	public function getLabel(){
+		return "$this->penulis, $this->penerbit"; //jika this-> tidak dibuat, makan dia akan mencetak variable baru, sementara kita ingin mengambil nilai dari properti, untuk itu perlu variable scoope $this->
 	}
 
 }
@@ -53,4 +53,4 @@ $produk3->harga = 30000;
 
 echo "Komik : $produk3->penulis, $produk3->peneerbit";
 echo "<br>";
-echo $produk3->sayHello();
+echo $produk3->getLabel(); // yang di cetak adalah penulis dan penerbit nilai yg telah di timpa di produk3, bukan default lagi
