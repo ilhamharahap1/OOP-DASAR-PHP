@@ -51,6 +51,20 @@ $produk3->peneerbit = "shonen jump";
 $produk3->harga = 30000;
 
 
-echo "Komik : $produk3->penulis, $produk3->peneerbit";
+// echo "Komik : $produk3->penulis, $produk3->peneerbit";
+// echo "<br>";
+// echo $produk3->getLabel(); // yang di cetak adalah penulis dan penerbit nilai yg telah di timpa di produk3, bukan default lagi
+
+
+
+echo "<hr>";
+
+$produk4 = new Produk();
+$produk4->judul = "uncharted";
+$produk4->penulis = "neil druckmann";
+$produk4->penerbit = "sony computer";
+$produk4->harga = 250000;
+
+echo "Komik : ".$produk3->getLabel();
 echo "<br>";
-echo $produk3->getLabel(); // yang di cetak adalah penulis dan penerbit nilai yg telah di timpa di produk3, bukan default lagi
+echo "Game :". $produk4->getLabel();
